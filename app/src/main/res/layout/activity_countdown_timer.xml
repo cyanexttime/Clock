@@ -21,4 +21,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Timer"/>
+
+    <Button
+        android:id="@+id/end_timer_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End Timer"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/timer_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_marginTop="20dp"/>
 </LinearLayout>
