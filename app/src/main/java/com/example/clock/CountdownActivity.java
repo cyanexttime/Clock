@@ -9,7 +9,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Context;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +21,7 @@ public class CountdownActivity extends AppCompatActivity {
     private Button backButton; // Thêm biến cho nút Back
     private CountDownTimer countDownTimer;
     private long remainingTimeInMillis;
+    private boolean isTimerRunning = false; // Biến để theo dõi trạng thái đồng hồ
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,10 @@ public class CountdownActivity extends AppCompatActivity {
         startTimerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isTimerRunning) {
+                    endCountdown(); // Dừng đồng hồ nếu đang chạy
+                    resetTimer(); // Reset màn hình
+                }
                 String timeText = countdownInput.getText().toString();
                 String unit = timeUnitSpinner.getSelectedItem().toString();
 
@@ -67,12 +71,14 @@ public class CountdownActivity extends AppCompatActivity {
             }
         });
     }
+
     private void hideKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
     private void startCountdown(int time, String unit) {
         remainingTimeInMillis = convertToMilliseconds(time, unit);
 
@@ -85,18 +91,27 @@ public class CountdownActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                isTimerRunning = false; // Đặt trạng thái là không chạy
                 timerDisplay.setText("00:00");
                 Toast.makeText(CountdownActivity.this, "Countdown finished!", Toast.LENGTH_SHORT).show();
             }
         }.start();
+
+        isTimerRunning = true; // Đặt trạng thái là đang chạy
     }
 
     private void endCountdown() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
+            isTimerRunning = false; // Đặt trạng thái là không chạy
             timerDisplay.setText("00:00");
             Toast.makeText(CountdownActivity.this, "Countdown stopped!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void resetTimer() {
+        timerDisplay.setText("00:00"); // Reset hiển thị timer
+        timeUnitSpinner.setSelection(0); // Reset spinner về giá trị mặc định
     }
 
     private long convertToMilliseconds(int time, String unit) {
