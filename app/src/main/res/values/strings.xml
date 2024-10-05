@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Clock</string>
+    <string-array name="time_units">
+        <item>Seconds</item>
+        <item>Minutes</item>
+        <item>Hours</item>
+    </string-array>
+</resources>
