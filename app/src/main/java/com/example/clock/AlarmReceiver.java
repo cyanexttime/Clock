@@ -1,8 +1,5 @@
 package com.example.clock;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -18,9 +15,8 @@ import androidx.annotation.RequiresApi;
 public class AlarmReceiver extends BroadcastReceiver {
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
-    // implement onReceive() method
+// implement onReceive() method
     public void onReceive(Context context, Intent intent) {
-
         // we will use vibrator first
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(4000);
