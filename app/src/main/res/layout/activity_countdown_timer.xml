@@ -1,38 +1,64 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        app:layout_constraintBottom_toTopOf="@+id/countdown_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="20dp" />
 
     <EditText
         android:id="@+id/countdown_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter Time"/>
+        android:hint="Enter Time"
+        app:layout_constraintBottom_toTopOf="@+id/time_unit_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/time_unit_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:entries="@array/time_units"/>
+        android:entries="@array/time_units"
+        app:layout_constraintBottom_toTopOf="@+id/start_timer_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/start_timer_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Timer"/>
+        android:text="Start Timer"
+        app:layout_constraintBottom_toTopOf="@+id/end_timer_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/end_timer_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="End Timer"
-        android:layout_marginTop="10dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/timer_display"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/timer_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/end_timer_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="20dp"/>
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

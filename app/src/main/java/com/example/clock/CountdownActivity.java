@@ -8,7 +8,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.content.Context;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CountdownActivity extends AppCompatActivity {
@@ -17,6 +19,7 @@ public class CountdownActivity extends AppCompatActivity {
     private TextView timerDisplay;
     private Button startTimerButton;
     private Button endTimerButton;
+    private Button backButton; // Thêm biến cho nút Back
     private CountDownTimer countDownTimer;
     private long remainingTimeInMillis;
 
@@ -30,6 +33,7 @@ public class CountdownActivity extends AppCompatActivity {
         timerDisplay = findViewById(R.id.timer_display);
         startTimerButton = findViewById(R.id.start_timer_button);
         endTimerButton = findViewById(R.id.end_timer_button);
+        backButton = findViewById(R.id.back_button); // Khởi tạo nút Back
 
         startTimerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +43,9 @@ public class CountdownActivity extends AppCompatActivity {
 
                 if (!timeText.isEmpty()) {
                     int time = Integer.parseInt(timeText);
+                    timerDisplay.setText("00:00");
                     startCountdown(time, unit);
+                    hideKeyboard(v);
                 } else {
                     Toast.makeText(CountdownActivity.this, "Please enter a valid time", Toast.LENGTH_SHORT).show();
                 }
@@ -52,8 +58,21 @@ public class CountdownActivity extends AppCompatActivity {
                 endCountdown();
             }
         });
-    }
 
+        // Thêm listener cho nút Back
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // Đóng activity hiện tại và quay lại activity trước đó
+            }
+        });
+    }
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
     private void startCountdown(int time, String unit) {
         remainingTimeInMillis = convertToMilliseconds(time, unit);
 
@@ -75,7 +94,7 @@ public class CountdownActivity extends AppCompatActivity {
     private void endCountdown() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
-            timerDisplay.setText("00:00");  // Reset về 00:00
+            timerDisplay.setText("00:00");
             Toast.makeText(CountdownActivity.this, "Countdown stopped!", Toast.LENGTH_SHORT).show();
         }
     }
