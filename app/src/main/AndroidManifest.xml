@@ -4,6 +4,7 @@
 
     <!-- Thêm quyền ở đây -->
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
