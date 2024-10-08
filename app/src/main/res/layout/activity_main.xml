@@ -36,7 +36,8 @@
             android:id="@+id/analogClockID"
             android:background="@drawable/clock_face"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" 
+            android:background="@drawable/clock_face"/>
 
     </androidx.cardview.widget.CardView>
 
