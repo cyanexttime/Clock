@@ -22,7 +22,7 @@ public class AlarmActivity extends AppCompatActivity {
     TimePicker alarmTimePicker;
     PendingIntent pendingIntent;
     AlarmManager alarmManager;
-
+    private Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +30,13 @@ public class AlarmActivity extends AppCompatActivity {
 
         alarmTimePicker = (TimePicker) findViewById(R.id.timePicker);
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
+        backButton = findViewById(R.id.back_button_2);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // Đóng activity hiện tại và quay lại activity trước đó
+            }
+        });
     }
 
     // OnToggleClicked() method is implemented the time functionality
